@@ -1,34 +1,19 @@
 {
-  "name": "hexo-site",
-  "version": "0.0.0",
-  "private": true,
+  "name": "test1",
+  "version": "2.0.0",
+  "description": "A project of vuepress-theme-hope",
+  "license": "MIT",
+  "type": "module",
   "scripts": {
-    "build": "hexo generate",
-    "clean": "hexo clean",
-    "deploy": "hexo deploy",
-    "server": "hexo server"
+    "docs:build": "vuepress build src",
+    "docs:clean-dev": "vuepress dev src --clean-cache",
+    "docs:dev": "vuepress dev src",
+    "docs:update-package": "pnpm dlx vp-update"
   },
-  "hexo": {
-    "version": "6.3.0"
-  },
-  "dependencies": {
-    "hexo": "^6.3.0",
-    "hexo-generator-archive": "^2.0.0",
-    "hexo-generator-baidu-sitemap": "^0.1.9",
-    "hexo-generator-category": "^2.0.0",
-    "hexo-generator-feed": "^3.0.0",
-    "hexo-generator-index": "^3.0.0",
-    "hexo-generator-json-content": "^4.2.3",
-    "hexo-generator-sitemap": "^3.0.1",
-    "hexo-generator-tag": "^2.0.0",
-    "hexo-neat": "^1.0.9",
-    "hexo-renderer-ejs": "^2.0.0",
-    "hexo-renderer-marked": "^6.0.0",
-    "hexo-renderer-stylus": "^3.0.0",
-    "hexo-server": "^3.0.0",
-    "hexo-theme-landscape": "^1.0.0",
-    "hexo-wordcount": "^6.0.1",
-    "node-prismjs": "^0.1.2",
-    "qr-image": "^3.2.0"
+  "devDependencies": {
+    "@vuepress/client": "2.0.0-beta.66",
+    "vue": "^3.2.47",
+    "vuepress": "2.0.0-beta.66",
+    "vuepress-theme-hope": "2.0.0-beta.233"
   }
 }
