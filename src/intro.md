@@ -3,6 +3,6 @@ icon: circle-info
 cover: /assets/images/cover3.jpg
 ---
 
-# 介绍页
+# 个人介绍
 
-将你的个人介绍和档案放置在此处。
+非科班出身的前端工程师，人生走了很多弯路，风雨兼程。
