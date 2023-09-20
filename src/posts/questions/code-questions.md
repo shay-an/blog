@@ -11,7 +11,6 @@ tag:
 star: false
 sticky: false
 ---
-[toc]
 
 ### 微任务宏任务
 

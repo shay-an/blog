@@ -11,7 +11,6 @@ tag:
 star: false
 sticky: false
 ---
-[toc]
 
 ### 基础题
 ![Alt text](./img/image.png)
