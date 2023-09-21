@@ -12,6 +12,7 @@ export default hopeTheme({
     name: "Shay",
     url: "https://github.com/shay-an",
   },
+  pageInfo:["Author", "Original", "Date", "ReadingTime", "Category", "Tag"],
 
   iconAssets: "fontawesome-with-brands",
 
