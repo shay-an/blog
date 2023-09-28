@@ -864,3 +864,8 @@ func ex02ReleaseLock(ctx context.Context, routine int, eventLogger *common.Concu
     可以设置为 10分1秒过期，10分23秒过期，10分8秒过期。单位秒部分就是随机时间，这样过期时间就分散了。
     对于热点数据，过期时间尽量设置得长一些，冷门的数据可以相对设置过期时间短一些。
 2. 使用缓存集群，避免单机宕机造成的缓存雪崩。
+
+### 参考文献
+
+PPT 链接：https://bytedance.feishu.cn/file/TcbGb6isWoTKbLxCaqfc77Qqnee
+DEMO 仓库：https://gitee.com/wedone/redis_course
