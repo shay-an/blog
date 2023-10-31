@@ -432,3 +432,85 @@ class LRUCatch {
     }
 }
 ```
+
+### 实现函数 promisify，把回调函数改成 promise 形式
+
+```javascript
+function timeOut(cb){
+    setTimeout(()=>{
+        cb(null,1000)
+    },1000)
+}
+
+function promisefy(fn){
+    return function (...args){
+        let hasCb = args.some((v)=> typeof v === 'function')
+        if (hasCb) {
+            fn(...args)
+        } else {
+            return new Promise((reslve,reject)=>{
+                fn(...args,cb)
+                function cb(err,data) {
+                    if (err) {
+                        reject(err)
+                    } else {
+                        reslve(data)
+                    }
+                }
+            })
+        }
+    }
+}
+
+let pTimeout = promisefy(timeOut)
+pTimeout().then((data)=>{
+    console.log(data)
+})
+```
+
+### 如何实现一个 ORM 类似的 find 链式调用
+
+测试用例
+
+```javascript
+const data = [
+    {userId: 8, title: 'title1'},
+    {userId: 11, title: 'other'},
+    {userId: 15, title: null},
+    {userId: 19, title: 'title2'}
+];
+
+// 查找data中，符合where中条件的数据，并根据orderBy中的条件进行排序
+const result = find(data).where({
+    "title": /\d$/   // 这里意思是过滤出数组中，满足title字段中符合 /\d$/的项
+}).orderBy('userId', 'desc');  // 这里的意思是对数组中的项按照userId进行倒序排列
+
+//=> 返回 [{ userId: 19, title: 'title2'}, { userId: 8, title: 'title1' }];
+console.log(result.data);
+```
+
+实现
+
+```javascript
+function find(data){
+    return {
+        data,
+        where(match){
+            this.data = this.data.filter((item)=>{
+                return Object.entries(match).every(([key,value])=>{
+                    if (value instanceof RegExp) {
+                        return value.test(item[key])
+                    } else {
+                        return value === item[key]
+                    }
+                })
+            })
+            return this
+        },
+        orderBy(key,type){
+            this.data.sort((x,y)=>type !== 'desc' ? x[key] - y[key] : y[key] - x[key])
+            return this
+        }
+    }
+}
+```
