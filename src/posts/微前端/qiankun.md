@@ -2,7 +2,7 @@
 title: qiankun 微前端架构
 cover: /assets/images/cover2.jpg
 icon: pen-to-square
-date: 2023-07-28
+date: 2023-11-01
 category:
   - qiankun
 tag:
