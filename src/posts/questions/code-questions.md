@@ -514,3 +514,45 @@ function find(data){
     }
 }
 ```
+
+### 闭包过期问题
+
+```javascript
+function createIncrement(i) {
+  let value = 0
+  function increment() {
+    value += i
+    console.log(`Increment value is ${value} `)
+    const message = `LogValue is ${value} `
+    function logMessage() {
+      console.log(message)
+    }
+    return logMessage
+  }
+  return increment
+}
+const inc = createIncrement(1) // 返回 increment ，
+const log = inc() // 返回 logMessage， Increment value is ? 1
+inc() // +1  Increment value is ? 2
+inc() // +1  Increment value is ? 3
+log() // LogValue is ? 2
+```
+在 JS 中，函数运行的上下文是由定义的位置决定的， 当函数的闭包包住了旧的变量值时，就出现了过期闭包问题。
+```jsx
+function WatchCount() {
+	const [count, setCount] = useState(0);
+	useEffect(() => {
+		const id = setInterval(() => {
+			console.log(`Current Count is ${ count } `);
+		}, 1000);
+		return () => clearInterval(id);
+	}, [count]);
+	const increment = () => setCount(count + 1);
+	return (
+        <div>
+            { count }
+            <Button onClick = { increment }>Increment</Button>
+        </div>
+    );
+}
+```
