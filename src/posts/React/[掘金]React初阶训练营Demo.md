@@ -1,6 +1,5 @@
 ---
 title: [掘金]React初阶训练营Demo
-cover: /assets/images/cover2.jpg
 icon: pen-to-square
 date: 2023-09-01
 category:
