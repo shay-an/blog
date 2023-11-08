@@ -140,10 +140,13 @@ function session(options) {
     });
 
     // proxy end() to commit the session
+    // 这里重写原生的 res.end 方法，用于提交session
+    // 缓存原生 end 方法
     var _end = res.end;
     var _write = res.write;
     var ended = false;
     res.end = function end(chunk, encoding) {
+      // 如果之前执行过则不再提交 session
       if (ended) {
         return false;
       }
@@ -201,7 +204,7 @@ function session(options) {
       }
 
       if (shouldDestroy(req)) {
-        // destroy session
+        // 销毁session
         debug('destroying');
         store.destroy(req.sessionID, function ondestroy(err) {
           if (err) {
@@ -405,4 +408,6 @@ function session(options) {
 }
 ```
 
-中间件开发可以参考这个代码结构，通过一个闭包先处理 options,然后返回一个函数用作中间件执行的回调，函数内可以访问 options。
+中间件开发可以参考这个代码结构，通过一个闭包先处理 options,然后返回一个函数用作中间件执行的回调，函数内可以访问 options。重写方法可以先缓存原有方法，覆盖对象身上原有方法，利用call apply bind 可绑定 this 的特性调用缓存方法指定该对象，实现完整的方法覆写，并保证原有逻辑不变。
+
+自定义 store 需实现 store.get(sessionID) 获取 session  store.touch(sessionID) 删除空闲 session store.destroy(sessionID) 销毁指定 session, 在 store 连接断开时发送 disconnect 事件，在 store 连接成功时发送 connect 事件。
