@@ -80,7 +80,7 @@ type p = Promise<'guang'>;
 type GetValueType<T> = T extends Promise<infer Value> ? Value : never;
 type GetType = GetValueType<p> // guang
 ```
-可以看出来把 p 传入 GetValueType 后，里面假设 T 是 Promise<infer Value> 类型，将Promise 入参的类型 定义为 Value 并返回
+可以看出来把 p 传入 GetValueType 后，里面假设 T 是 Promise```<infer Value>``` 类型，将Promise 入参的类型 定义为 Value 并返回
 
 ##### Lv2
 
